@@ -76,7 +76,7 @@ def adjust_results4_isadog(results_dic, dogfile):
             names = line.strip().split(", ")
             for name in names:
                 names_dic[name] = 1
-                print(name)
+                
         for result in results_dic:
             if(results_dic[result][0] in names_dic):
                 results_dic[result].append(1)

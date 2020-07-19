@@ -62,5 +62,21 @@ def print_results(results_dic, results_stats_dic, model,
     Returns:
            None - simply printing results.
     """    
-    None
-                
+    if(print_incorrect_dogs and 
+        (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'] 
+        != results_stats_dic['n_images'])):
+        print("Missclassified Dogs")
+        for result in results_dic:
+                if (sum(results_dic[result][3:]) == 1):
+                        print("File:{} label:{} classifier_label:{}".format(result,results_dic[result][0],results_dic[result][1]))
+
+    if(print_incorrect_breed and
+    (results_stats_dic['n_correct_breed'] != results_stats_dic['n_correct_dogs'])):
+        print("Missclassified Breed")
+        for result in results_dic:
+                if (results_dic[result][2] == 0 and sum(results_dic[result][3:]) == 2):
+                        print("File:{} label:{} classifier_label:{}".format(result,results_dic[result][0],results_dic[result][1]))      
+    print("** Statistics Result")
+    print("model:{}".format(model))
+    print("N Images:{}  N Dog Images:{}  N NotDog Images:{}".format(results_stats_dic['n_images'],results_stats_dic['n_dogs_img'],results_stats_dic['n_notdogs_img']))
+    print("Pct Corr dog:{}  Pct Corr NOTdog:{}  Pct Corr Breed:{}".format(results_stats_dic['pct_correct_dogs'],results_stats_dic['pct_correct_notdogs'],results_stats_dic['pct_correct_breed']))
