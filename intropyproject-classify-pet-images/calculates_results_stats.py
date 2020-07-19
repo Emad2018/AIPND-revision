@@ -68,6 +68,37 @@ def calculates_results_stats(results_dic):
                      and the classroom Item XX Calculating Results for details
                      on how to calculate the counts and statistics.
     """        
+    
     # Replace None with the results_stats_dic dictionary that you created with 
-    # this function 
-    return None
+    # this function
+    results_stats_dic={
+                        'n_images':0,'n_dogs_img':0,'n_notdogs_img':0,'n_match':0,'n_correct_dogs':0,
+                        'n_correct_notdogs':0,'n_correct_breed':0,'pct_match':0,'pct_correct_dogs':0,
+                        'pct_correct_breed':0,'pct_correct_notdogs':0
+                      } 
+    for result in results_dic:
+           results_stats_dic['n_images'] +=1
+
+           if (results_dic[result][3]==1):
+                results_stats_dic['n_dogs_img'] +=1
+           else:
+                results_stats_dic['n_notdogs_img'] +=1
+
+           if (results_dic[result][2]==1):
+                results_stats_dic['n_match'] +=1
+                if(results_dic[result][3]==1):
+                        results_stats_dic['n_correct_breed'] +=1
+
+           if(results_dic[result][3]==1 and results_dic[result][4]==1):
+                results_stats_dic['n_correct_dogs'] +=1
+           elif(results_dic[result][3]==0 and results_dic[result][4]==0):
+                results_stats_dic['n_correct_notdogs'] +=1
+
+    results_stats_dic['pct_match'] =results_stats_dic['n_match']/results_stats_dic['n_images']*100
+    results_stats_dic['pct_correct_dogs'] =results_stats_dic['n_correct_dogs']/results_stats_dic['n_dogs_img']*100
+    results_stats_dic['pct_correct_breed'] =results_stats_dic['n_correct_breed']/results_stats_dic['n_dogs_img']*100
+    try:
+        results_stats_dic['pct_correct_notdogs'] =results_stats_dic['n_correct_notdogs']/results_stats_dic['n_notdogs_img']*100
+    except:
+            print('n_notdogs_img=0')    
+    return results_stats_dic
