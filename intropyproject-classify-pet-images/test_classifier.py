@@ -23,7 +23,7 @@ test_image="pet_images/Collie_03797.jpg"
 # Defines a model architecture to be used for classification
 # NOTE: this function only works for model architectures: 
 #      'vgg', 'alexnet', 'resnet'  
-model = "vgg"
+model = "alexnet"
 
 # Demonstrates classifier() functions usage
 # NOTE: image_classication is a text string - It contains mixed case(both lower
