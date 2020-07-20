@@ -78,13 +78,17 @@ def adjust_results4_isadog(results_dic, dogfile):
                 names_dic[name] = 1
                 
         for result in results_dic:
+
             if(results_dic[result][0] in names_dic):
                 results_dic[result].append(1)
             else:
                 results_dic[result].append(0)
+
             classifier_output = results_dic[result][1].split(",")
+            results_dic[result].append(0)
             for classifier_ in classifier_output:
                 if(classifier_ in names_dic):
-                    results_dic[result].append(1)
-                else:
-                    results_dic[result].append(0)
+                    results_dic[result][-1]=1
+                    break
+
+                

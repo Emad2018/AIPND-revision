@@ -69,7 +69,7 @@ def classify_images(images_dir, results_dic, model):
     """
 
     for image_dict in results_dic:
-        image_classification = classifier(images_dir+image_dict, model).lower()
+        image_classification = classifier(images_dir+image_dict, model).lower().strip()
         results_dic[image_dict].append(image_classification)
         if (results_dic[image_dict][0] in image_classification):
             results_dic[image_dict].append(1)

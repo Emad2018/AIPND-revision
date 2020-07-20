@@ -48,6 +48,8 @@ def get_pet_labels(image_dir):
     filename_list = listdir(image_dir)
     results_dic = {}
     for pet_image in filename_list:
+        if pet_image.startswith("."):
+            continue
         # Sets string to lower case letters
         low_pet_image = pet_image.lower()
 
