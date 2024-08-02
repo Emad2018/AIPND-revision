@@ -61,22 +61,21 @@ def print_results(results_dic, results_stats_dic, model,
                               False doesn't print anything(default) (bool) 
     Returns:
            None - simply printing results.
-    """    
-    if(print_incorrect_dogs and 
-        (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'] 
-        != results_stats_dic['n_images'])):
-        print("Missclassified Dogs")
-        for result in results_dic:
-                if (sum(results_dic[result][3:]) == 1):
-                        print("File:{} label:{} classifier_label:{}".format(result,results_dic[result][0],results_dic[result][1]))
-
-    if(print_incorrect_breed and
-    (results_stats_dic['n_correct_breed'] != results_stats_dic['n_correct_dogs'])):
-        print("Missclassified Breed")
-        for result in results_dic:
-                if (results_dic[result][2] == 0 and sum(results_dic[result][3:]) == 2):
-                        print("File:{} label:{} classifier_label:{}".format(result,results_dic[result][0],results_dic[result][1]))      
-    print("** Statistics Result")
-    print("model:{}".format(model))
-    print("N Images:{}  N Dog Images:{}  N NotDog Images:{}".format(results_stats_dic['n_images'],results_stats_dic['n_dogs_img'],results_stats_dic['n_notdogs_img']))
-    print("Pct Corr dog:{}  Pct Corr NOTdog:{}  Pct Corr Breed:{}".format(results_stats_dic['pct_correct_dogs'],results_stats_dic['pct_correct_notdogs'],results_stats_dic['pct_correct_breed']))
+    """ 
+    print("results:")   
+    print("N Images: {:2d}  N Dog Images: {:2d}  N NotDog Images: {:2d} \nPct Corr dog: {:5.1f} Pct Corr NOTdog: {:5.1f}  Pct Corr Breed: {:5.1f}\n".format(
+              results_stats_dic['n_images'], results_stats_dic['n_dogs_img'],
+              results_stats_dic['n_notdogs_img'], results_stats_dic['pct_correct_dogs'],
+              results_stats_dic['pct_correct_notdogs'],
+              results_stats_dic['pct_correct_breed']))
+    if print_incorrect_dogs:
+        for image in results_dic:
+            # Image is dog (results_dic["image"][3]) and classifer not a dog
+            if results_dic[image][3] != results_dic[image][4]:
+                print ("incorrect_dogs: {}\n".format(results_dic[image][0]))
+    if print_incorrect_breed:
+        for image in results_dic:
+            # Image is dog (results_dic["image"][3]) and classifer not matching 
+            if results_dic[image][3]== True and results_dic[image][2]== False:
+                print ("incorrect_breed: {}\n".format(results_dic[image][0]))
+                

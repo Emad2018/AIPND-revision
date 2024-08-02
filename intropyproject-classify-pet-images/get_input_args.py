@@ -45,14 +45,14 @@ def get_input_args():
     # Creates Argument Parser object named parser
     parser = argparse.ArgumentParser()
 
-    # Argument 1: that's a path to a folder
-    parser.add_argument('--dir', type=str, default='pet_images/',
-                        help='path to the folder of pet images')
-    parser.add_argument('--arch', type=str, default='vgg',
-                        help='The Network architecture')
-    parser.add_argument('--dogfile', type=str, default='dognames.txt',
-                        help='The Dog name file')
-    # Assigns variable in_args to parse_args()
-    in_args = parser.parse_args()
-
-    return in_args
+    ## Argument 1: that's a path to a folder
+    parser.add_argument('--dir', type = str, default = 'pet_images/', 
+                    help = 'path to the folder of pet images')
+    
+    parser.add_argument('--arch', type = str, default = 'vgg', 
+                    help = 'CNN Model Architecture') 
+    
+    parser.add_argument('--dogfile', type = str, default = 'dognames.txt', 
+                    help = 'Text File with Dog Names')  
+    
+    return parser.parse_args()
